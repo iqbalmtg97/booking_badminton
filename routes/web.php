@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/kel-penyewa', [App\Http\Controllers\PenyewaController::class, 'index'])->name('penyewa');
+
+Route::get('/kel-booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking');
+
+Route::get('/kel-lapangan', [App\Http\Controllers\LapanganController::class, 'index'])->name('lapangan');
+
+Route::get('/kel-batal', [App\Http\Controllers\BatalController::class, 'index'])->name('batal');
