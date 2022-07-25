@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PenyewaController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LapanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +24,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/kel-penyewa', [App\Http\Controllers\PenyewaController::class, 'index'])->name('penyewa');
-    Route::get('/kel-booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking');
-    Route::get('/kel-lapangan', [App\Http\Controllers\LapanganController::class, 'index'])->name('lapangan');
-});
+Route::get('/dashboard', [HomeController::class, 'index']);
+Route::get('/kel-booking', [BookingController::class, 'index']);
 
-Route::group(['middleware' => ['auth', 'checkRole:User']], function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/kel-booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking');
+Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
+    Route::get('/kel-penyewa', [PenyewaController::class, 'index']);
+    Route::get('/kel-lapangan', [LapanganController::class, 'index']);
 });
 
 

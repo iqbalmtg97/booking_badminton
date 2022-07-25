@@ -23,8 +23,9 @@
     <script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
     <!-- /core JS files -->
 
-
-    @stack('detail')
+    <!-- Theme JS files -->
+  	@stack('detail')
+	<!-- /theme JS files -->
 
 
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
@@ -85,19 +86,19 @@
         <div class="navbar-collapse collapse" id="navbar-second-toggle">
             <ul class="nav navbar-nav">
                 @if (auth()->user()->role == 'Admin')
-                    <li class="active"><a href="{{ route('dashboard') }}"><i class="icon-display4 position-left"></i>
+                    <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
                             Dashboard</a></li>
-                    <li class="active"><a href="{{ route('penyewa') }}"><i class="icon-people position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-penyewa') }}"><i class="icon-people position-left"></i>
                             Penyewa</a></li>
-                    <li class="active"><a href="{{ route('booking') }}"><i class="icon-circle position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-circle position-left"></i>
                             Booking</a></li>
-                    <li class="active"><a href="{{ route('lapangan') }}"><i class="icon-square position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-lapangan') }}"><i class="icon-square position-left"></i>
                             Lapangan</a></li>
                     <li class="active"><a href="#"><i class="icon-warning position-left"></i> Pembatalan</a></li>
                 @else
-                    <li class="active"><a href="{{ route('dashboard') }}"><i class="icon-display4 position-left"></i>
+                    <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
                             Dashboard</a></li>
-                    <li class="active"><a href="{{ route('booking') }}"><i class="icon-circle position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-circle position-left"></i>
                             Booking</a></li>
                 @endif
             </ul>

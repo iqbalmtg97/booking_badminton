@@ -51,8 +51,8 @@ https://templatemo.com/tm-537-art-factory
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#welcome" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#about">About</a></li>
-                            <li class="scroll-to-section"><a href="#services">Services</a></li>
-                            <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#services">Services</a></li> -->
+                            <!-- <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li> -->
                             <li class="submenu">
                                 <a href="javascript:;">Drop Down</a>
                                 <ul>
@@ -63,6 +63,8 @@ https://templatemo.com/tm-537-art-factory
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/login')}}">Login</a></li>
+                            <li class="scroll-to-section"><a href="{{url('/register')}}">Register</a></li>
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
