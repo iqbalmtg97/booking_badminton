@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BOOK-BADMINTON | @yield('tittle') </title>
+    <title>Pattiro Booking Online | @yield('tittle') </title>
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
 <body>
 
     <!-- Main navbar -->
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse bg-primary">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html"><img src="assets/images/pattiro.png" alt=""></a>
 
@@ -90,15 +90,15 @@
                             Dashboard</a></li>
                     <li class="active"><a href="{{ url('/kel-penyewa') }}"><i class="icon-people position-left"></i>
                             Penyewa</a></li>
-                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-circle position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-bookmarks position-left"></i>
                             Booking</a></li>
-                    <li class="active"><a href="{{ url('/kel-lapangan') }}"><i class="icon-square position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-lapangan') }}"><i class="icon-grid6 position-left"></i>
                             Lapangan</a></li>
-                    <li class="active"><a href="#"><i class="icon-warning position-left"></i> Pembatalan</a></li>
+                    <li class="active"><a href="#"><i class="icon-cancel-circle2 position-left"></i> Pembatalan</a></li>
                 @else
                     <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
                             Dashboard</a></li>
-                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-circle position-left"></i>
+                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-bookmarks position-left"></i>
                             Booking</a></li>
                 @endif
             </ul>

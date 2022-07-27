@@ -9,7 +9,7 @@
     <meta name="author" content="Template Mo">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
-    <title>Booking Lapangan Badminton</title>
+    <title>Pattiro Booking Online</title>
     <!--
 
 ART FACTORY

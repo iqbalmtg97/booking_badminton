@@ -2,6 +2,8 @@
 @section('tittle', 'Dashboard')
 @section('conten')
     <!-- Quick stats boxes -->
+<div class="row">
+    <div class="col-lg-6">
     <div class="row">
         <div class="col-lg-4">
 
@@ -61,5 +63,11 @@
 
         </div>
     </div>
+    </div>
+    <div class="col-lg-6">
+        
+    </div>
+</div>
+    
     <!-- /quick stats boxes -->
 @endsection

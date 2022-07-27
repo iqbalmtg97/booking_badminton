@@ -9,8 +9,10 @@ class PenyewaController extends Controller
 {
     public function index()
     {
-        // $penyewas = \App\Models\User::all();
-        // return view('admin.kelola-penyewa',compact('penyewas'));
+        $penyewas = \App\Models\User::all();
+        return view('admin.kelola-penyewa',compact('penyewas'));
         return view('admin.kelola-penyewa');
     }
+
+    
 }
