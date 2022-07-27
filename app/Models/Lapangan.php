@@ -10,7 +10,7 @@ class Lapangan extends Model
     use HasFactory;
 
     protected $table = 'lapangan';
-    protected $fillable = ['nama_lapangan', 'biaya'];
+    protected $fillable = ['nama_lapangan', 'biaya_lapangan'];
     protected $guarded = [];
 
     public function booking()

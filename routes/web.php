@@ -30,6 +30,10 @@ Route::get('/kel-booking', [BookingController::class, 'index']);
 Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
     Route::get('/kel-penyewa', [PenyewaController::class, 'index']);
     Route::get('/kel-lapangan', [LapanganController::class, 'index']);
+    Route::post('/kel-lapangan/store', [LapanganController::class, 'store']);
+    Route::post('/kel-lapangan/update', [LapanganController::class, 'update']);
+    Route::get('/kel-lapangan/destroy/{id}', [LapanganController::class, 'destroy']);
+    Route::get('/getdata/{id}', [LapanganController::class, 'getdata']);
 });
 
 

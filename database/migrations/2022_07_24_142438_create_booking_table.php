@@ -22,7 +22,8 @@ class CreateBookingTable extends Migration
             $table->integer('durasi');
             $table->integer('biaya');
             $table->string('bukti_bayar', 255)->nullable();
-            $table->integer('status');
+            $table->string('status');
+            $table->string('alasan_batal')->nullable();
             $table->timestamps();
         });
     }

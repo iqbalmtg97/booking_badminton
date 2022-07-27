@@ -14,6 +14,7 @@
     <link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
@@ -23,9 +24,13 @@
     <script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
     <!-- /core JS files -->
 
+    {{-- Toastr --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
     <!-- Theme JS files -->
-  	@stack('detail')
-	<!-- /theme JS files -->
+    @stack('detail')
+    <!-- /theme JS files -->
 
 
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
@@ -94,7 +99,8 @@
                             Booking</a></li>
                     <li class="active"><a href="{{ url('/kel-lapangan') }}"><i class="icon-grid6 position-left"></i>
                             Lapangan</a></li>
-                    <li class="active"><a href="#"><i class="icon-cancel-circle2 position-left"></i> Pembatalan</a></li>
+                    <li class="active"><a href="#"><i class="icon-cancel-circle2 position-left"></i>
+                            Pembatalan</a></li>
                 @else
                     <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
                             Dashboard</a></li>
@@ -129,6 +135,24 @@
     </div>
     <!-- /footer -->
 
+    {{-- Sweetalert2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+
+    {{-- Toastr --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (Session::has('sukses'))
+            toastr.success("{{ Session::get('sukses') }}", "Selamat")
+        @endif
+
+        @if (Session::has('gagal'))
+            toastr.error("{{ Session::get('gagal') }}", "Gagal")
+        @endif
+    </script>
 </body>
+@yield('footer')
 
 </html>

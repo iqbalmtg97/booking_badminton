@@ -1,129 +1,200 @@
 @extends ('layouts.master')
-@section('tittle',"Data Lapangan")
+@section('tittle', 'Data Lapangan')
 @section('conten')
-<div class="panel panel-flat">
-					<div class="panel-heading">
-						<h5 class="panel-title">Data Lapangan</h5>
-                        
-						<div class="heading-elements">
-							<ul class="icons-list">
-		                		<li><a data-action="collapse"></a></li>
-		                		<li><a data-action="reload"></a></li>
-		                		<li><a data-action="close"></a></li>
-		                	</ul>
-	                	</div>
-					</div>
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Data Lapangan</h5>
 
-					<div class="panel-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-labeled btn-rounded" data-toggle="modal"data-target="#modal_form_horizontal"><b><i class="icon-"></i></b>Tambah</button>
-					</div>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+        </div>
 
-					<table class="table datatable-basic">
-						<thead>
-							<tr>
-								<th>Nama Lapangan</th>
-								<th>Nama Lapangan</th>
-								<th>Nama Lapangan</th><th>Nama Lapangan</th>
-								<th>Biaya Lapangan</th>
-								<th class="text-center">Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Lapangan A</td>
-								<td>Lapangan A</td>
-								<td>Lapangan A</td><td>Lapangan A</td>
-								<td><a href="#">50.000</a></td>
-								<td>
-									<ul class="icons-list">
-										<li class="text-primary-600" data-toggle="modal"data-target="#modal_form_horizontal"><a href="#"><i class="icon-pencil7"></i></a></li>
-										<li class="text-danger-600"><a href="#"><i class="icon-trash"></i></a></li>
-										<li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /basic datatable -->
-                
-    
-                <!-- /form modal tambah -->
-                <div id="modal_form_horizontal" class="modal fade">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h5 class="modal-title">Tambah Lapangan</h5>
-							</div>
+        <div class="panel-body">
+            <button type="button" class="btn btn-primary btn-xs btn-labeled btn-rounded"
+                data-toggle="modal"data-target="#tambah_lapangan"><b><i class="icon-"></i></b>Tambah</button>
+        </div>
 
-							<form action="#" class="form-horizontal">
-								<div class="modal-body">
-									<div class="form-group">
-										<label class="control-label col-sm-3">Nama Laapangan</label>
-										<div class="col-sm-9">
-											<input type="text" placeholder="Eugene" class="form-control">
-										</div>
-									</div>
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>Nama Lapangan</th>
+                    <th>Biaya Lapangan</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($data as $datas)
+                    <tr>
+                        <td>{{ $datas->nama_lapangan }}</td>
+                        <td><a href="#">Rp. {{ $datas->biaya_lapangan }} </a></td>
+                        <td>
+                            <ul class="icons-list">
+                                <li class="text-primary-600" data-toggle="modal" data-target="#edit_lapangan">
+                                    <a href="#" class="edit_lapangan" onclick="getdata({{ $datas->id }})"
+                                        id="{{ $datas->id }}"><i class="icon-pencil7"></i></a>
+                                </li>
+                                <li class="text-danger-600"><a href="#" class="delete"
+                                        nama_lapangan="{{ $datas->nama_lapangan }}" id="{{ $datas->id }}"><i
+                                            class="icon-trash"></i></a></li>
+                                {{-- <a href="#" class="btn btn-danger delete" namalapangan="{{ $datas->nama_lapangan }}"
+                                    id="{{ $datas->id }}">Hapus</a> --}}
+                                <li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <!-- /basic datatable -->
 
-									<div class="form-group">
-										<label class="control-label col-sm-3">Biaya Lapangan</label>
-										<div class="col-sm-9">
-											<input type="text" placeholder="Kopyov" class="form-control">
-										</div>
-									</div>
 
-								<div class="modal-footer">
-									<button type="button" class="btn btn-link" data-dismiss="modal">Tutup</button>
-									<button type="submit" class="btn btn-primary">Simpan</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-                <!-- /form modal -->
+    <!-- /form modal tambah -->
+    <div class="modal fade" id="tambah_lapangan" tabindex="-1" role="dialog" aria-labelledby="tambah_lapangan"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Lapangan</h5>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/kel-lapangan/store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nama Lapangan</label>
+                            <input type="text" class="form-control" name="nama_lapangan"
+                                value="{{ old('nama_lapangan') }}" placeholder="Masukkan Nama Lapangan ..." autofocus>
+                            @error('nama_lapangan')
+                                <div class="text-danger ml-3 mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Biaya Lapangan</label>
+                            <input type="text" class="form-control" name="biaya_lapangan"
+                                value="{{ old('biaya_lapangan') }}" placeholder="Masukkan Biaya Lapangan ...">
+                            @error('biaya_lapangan')
+                                <div class="text-danger ml-3 mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /form modal -->
 
-				<!-- /form modal edit -->
-                <div id="modal_form_horizontal" class="modal fade">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h5 class="modal-title">Tambah Lapangan</h5>
-							</div>
+    <!-- /form modal edit -->
+    <div class="modal fade" id="edit_lapangan" tabindex="-1" role="dialog" aria-labelledby="edit_lapangan"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Lapangan</h5>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/kel-lapangan/update') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" id="id" name="id" value="">
+                        <input type="hidden" id="url_getdata" name="url_getdata" value="{{ url('getdata/') }}">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nama Lapangan</label>
+                            <input type="text" class="form-control" name="nama_lapangan" id="nama_lapangan"
+                                value="{{ old('nama_lapangan') }}" placeholder="Masukkan Nama Lapangan ..." autofocus>
+                            @error('nama_lapangan')
+                                <div class="text-danger ml-3 mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Biaya Lapangan</label>
+                            <input type="text" class="form-control" name="biaya_lapangan" id="biaya_lapangan"
+                                value="{{ old('biaya_lapangan') }}" placeholder="Masukkan Biaya Lapangan ...">
+                            @error('biaya_lapangan')
+                                <div class="text-danger ml-3 mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /form modal -->
 
-							<form action="#" class="form-horizontal">
-								<div class="modal-body">
-									<div class="form-group">
-										<label class="control-label col-sm-3">Nama Laapangan</label>
-										<div class="col-sm-9">
-											<input type="text" placeholder="Eugene" class="form-control">
-										</div>
-									</div>
 
-									<div class="form-group">
-										<label class="control-label col-sm-3">Biaya Lapangan</label>
-										<div class="col-sm-9">
-											<input type="text" placeholder="Kopyov" class="form-control">
-										</div>
-									</div>
 
-								<div class="modal-footer">
-									<button type="button" class="btn btn-link" data-dismiss="modal">Tutup</button>
-									<button type="submit" class="btn btn-primary">Simpan</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-                <!-- /form modal -->
-<!-- @push('detail') -->
-    <!-- Theme JS files -->
-        <!-- <script type="text/javascript" src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
-	    <script type="text/javascript" src="{{asset('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+    <!-- @push('detail')
+        -->
+        <!-- Theme JS files -->
+        <!-- <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 
-	    <script type="text/javascript" src="{{asset('assets/js/core/app.js')}}"></script>
-	    <script type="text/javascript" src="{{asset('assets/js/pages/datatables_basic.js')}}"></script> -->
-	<!-- /theme JS files -->
-<!-- @endpush -->
+                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
+        <!-- /theme JS files -->
+        <!--
+    @endpush -->
+@endsection
+@section('footer')
+    {{-- get data lapangan --}}
+    <script>
+        function getdata(id) {
+            console.log(id)
+            var url = $('#url_getdata').val() + '/' + id
+            console.log(url);
+
+            $.ajax({
+                url: url,
+                cache: false,
+                success: function(response) {
+                    console.log(response);
+
+                    $('#id').val(response.id);
+                    $('#nama_lapangan').val(response.nama_lapangan);
+                    $('#biaya_lapangan').val(response.biaya_lapangan);
+                }
+            });
+        }
+
+        $('.delete').click(function() {
+            var Id = $(this).attr('id');
+            var Namalapangan = $(this).attr('nama_lapangan');
+            Swal.fire({
+                    title: 'Yakin?',
+                    text: "Mau Hapus " + Namalapangan + "?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                })
+                .then((result) => {
+                    console.log(result);
+                    if (result.value) {
+                        window.location = "/kel-lapangan/destroy/" + Id + "";
+                    }
+                });
+        });
+    </script>
 @endsection
