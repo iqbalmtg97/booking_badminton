@@ -2,8 +2,12 @@
 @section('tittle', 'Data Booking')
 @section('kel-booking', 'active')
 @section('conten')
-    <p style="padding-top: 10px; padding-bottom:10px" class="bg-danger text-center">Uang DP Akan Hangus 50% Jika Melakukan
-        Pembatalan, Uang Sisa DP Dapat Diambil Lansung Dilapangan</p>
+    @if (auth()->user()->role == 'User')
+        <p style="padding-top: 10px; padding-bottom:10px" class="bg-danger text-center">Jika Status Booking Disetujui Admin
+            dan
+            Penyewa Melakukan Pembatalan, Maka
+            Uang DP Akan Hangus 50%<br> Uang Sisa DP Dapat Diambil Langsung Dilapangan</p>
+    @endif
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Data Booking</h5>
@@ -21,7 +25,7 @@
         @else
             <div class="panel-body">
                 <button type="button" data-toggle="modal"data-target="#tambahbooking"
-                    class="btn btn-primary btn-xs btn-labeled btn-rounded"><b><i class="icon-people"></i></b>Booking
+                    class="btn btn-primary btn-xs btn-labeled btn-rounded"><b><i class="icon-add"></i></b>Booking
                     Sekarang</button>
             </div>
         @endif
