@@ -195,10 +195,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="col-sm-12 text-center">
-                                <img id="lihat_bukti"
-                                    style="height: 500px; width: 300px; object-fit: cover; object-position: center;"
-                                    class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
-                                    alt="">
+                                @if ($data->count() < '1')
+                                    Tidak Ada
+                                @else
+                                    <img id="lihat_bukti"
+                                        style="height: 500px; width: 300px; object-fit: cover; object-position: center;"
+                                        class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
+                                        alt="">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -437,6 +441,7 @@
                     $('#id_batal').val(response.id);
                     $('#id_pilihan').val(response.id);
                     $('#id_lihat').val(response.id);
+                    $('#lihatbukti').val(response.lihat_bukti);
                 }
             });
         }
