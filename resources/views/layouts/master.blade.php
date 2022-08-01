@@ -35,7 +35,7 @@
 
 </head>
 
-<body>
+<body background="{{ asset('images/bg.jpg') }}" style="background-size: 100%">
 
     <!-- Main navbar -->
     <div class="navbar navbar-inverse bg-primary">
@@ -58,8 +58,6 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#"><i class="icon-user-plus"></i> Akun Saya</a></li>
-                        <li><a href="#"><i class="icon-cog5"></i> Edit Akun</a></li>
                         <li><a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
 							document.getElementById('logout-form').submit();">
@@ -86,20 +84,24 @@
         <div class="navbar-collapse collapse" id="navbar-second-toggle">
             <ul class="nav navbar-nav">
                 @if (auth()->user()->role == 'Admin')
-                    <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
+                    <li class="@yield('dashboard')"><a href="{{ url('/dashboard') }}"><i
+                                class="icon-display4 position-left"></i>
                             Dashboard</a></li>
-                    <li class="active"><a href="{{ url('/kel-penyewa') }}"><i class="icon-people position-left"></i>
+                    <li class="@yield('kel-penyewa')"><a href="{{ url('/kel-penyewa') }}"><i
+                                class="icon-people position-left"></i>
                             Penyewa</a></li>
-                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-bookmarks position-left"></i>
+                    <li class="@yield('kel-booking')"><a href="{{ url('/kel-booking') }}"><i
+                                class="icon-bookmarks position-left"></i>
                             Booking</a></li>
-                    <li class="active"><a href="{{ url('/kel-lapangan') }}"><i class="icon-grid6 position-left"></i>
+                    <li class="@yield('kel-lapangan')"><a href="{{ url('/kel-lapangan') }}"><i
+                                class="icon-grid6 position-left"></i>
                             Lapangan</a></li>
-                    <li class="active"><a href="#"><i class="icon-cancel-circle2 position-left"></i>
-                            Pembatalan</a></li>
                 @else
-                    <li class="active"><a href="{{ url('/dashboard') }}"><i class="icon-display4 position-left"></i>
+                    <li class="@yield('dashboard')"><a href="{{ url('/dashboard') }}"><i
+                                class="icon-display4 position-left"></i>
                             Dashboard</a></li>
-                    <li class="active"><a href="{{ url('/kel-booking') }}"><i class="icon-bookmarks position-left"></i>
+                    <li class="@yield('kel-booking')"><a href="{{ url('/kel-booking') }}"><i
+                                class="icon-bookmarks position-left"></i>
                             Booking</a></li>
                 @endif
             </ul>

@@ -89,11 +89,45 @@ class BookingController extends Controller
     public function batal(Request $request)
     {
         // dd($request->all());
+        $rules = [
+            'alasan_batal' => 'required',
+        ];
+
+        $text = [
+            'alasan_batal.required' => 'Kolom Alasan Batal Tidak Boleh Kosong',
+        ];
+
+        $validasi = Validator::make($request->all(), $rules, $text);
+        if ($validasi->fails()) {
+            return redirect()->back()->withErrors($validasi)->withInput()->with('gagal', 'Ada Kesalahan Inputan !!!');
+        }
+
         $data = Booking::find($request->id);
         $data->alasan_batal = $request->alasan_batal;
         $data->save();
 
         return redirect()->back()->with('sukses', 'Pembatalan Booking Sudah Diajukan !!!');
+    }
+
+    public function pilihan(Request $request)
+    {
+        // dd($request->all());
+        $rules = [
+            'status' => 'required',
+        ];
+
+        $text = [
+            'status.required' => 'Kolom Pilihan Tidak Boleh Kosong',
+        ];
+
+        $validasi = Validator::make($request->all(), $rules, $text);
+        if ($validasi->fails()) {
+            return redirect()->back()->withErrors($validasi)->withInput()->with('gagal', 'Ada Kesalahan Inputan !!!');
+        }
+        $data = Booking::find($request->id);
+        $data->status = $request->status;
+        $data->update();
+        return redirect()->back()->with('sukses', 'Status Berhasil Diubah !!!');
     }
 
     public function destroy($id)

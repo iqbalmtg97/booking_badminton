@@ -1,5 +1,6 @@
 @extends ('layouts.master')
 @section('tittle', 'Data Lapangan')
+@section('kel-lapangan', 'active')
 @section('conten')
     <div class="panel panel-flat">
         <div class="panel-heading">
@@ -16,10 +17,10 @@
 
         <div class="panel-body">
             <button type="button" class="btn btn-primary btn-xs btn-labeled btn-rounded"
-                data-toggle="modal"data-target="#tambah_lapangan"><b><i class="icon-"></i></b>Tambah</button>
+                data-toggle="modal"data-target="#tambah_lapangan"><b><i class="icon-add"></i></b>Tambah</button>
         </div>
 
-        <table class="table datatable-basic">
+        <table class="table datatable-basiccl" id="myTable">
             <thead>
                 <tr>
                     <th>Nama Lapangan</th>
@@ -147,10 +148,10 @@
         -->
         <!-- Theme JS files -->
         <!-- <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
         <!-- /theme JS files -->
         <!--
     @endpush -->
@@ -196,14 +197,4 @@
                 });
         });
     </script>
-
-    @push('detail')
-        <!-- Theme JS files -->
-        <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-
-        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script>
-        <!-- /theme JS files -->
-    @endpush
 @endsection

@@ -31,6 +31,7 @@ Route::get('/kel-booking', [BookingController::class, 'index']);
 Route::post('/kel-booking/store', [BookingController::class, 'store']);
 Route::post('/kel-booking/update', [BookingController::class, 'updateBuktibayar']);
 Route::post('/kel-booking/batal', [BookingController::class, 'batal']);
+Route::post('/kel-booking/pilihan', [BookingController::class, 'pilihan']);
 Route::get('/kel-booking/hapus/{id}', [BookingController::class, 'destroy']);
 Route::get('/getdatas/{id}', [BookingController::class, 'getdata']);
 
@@ -38,6 +39,7 @@ Route::get('/getdatas/{id}', [BookingController::class, 'getdata']);
 Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
     // kel-penyewa
     Route::get('/kel-penyewa', [PenyewaController::class, 'index']);
+    Route::get('/kel-penyewa/destroy/{id}', [PenyewaController::class, 'destroy']);
 
     // kel-lapangan
     Route::get('/kel-lapangan', [LapanganController::class, 'index']);
