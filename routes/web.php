@@ -30,7 +30,8 @@ Route::get('/dashboard', [HomeController::class, 'index']);
 Route::get('/kel-booking', [BookingController::class, 'index']);
 Route::post('/kel-booking/store', [BookingController::class, 'store']);
 Route::post('/kel-booking/update', [BookingController::class, 'updateBuktibayar']);
-Route::get('/kel-booking/batal/{id}', [BookingController::class, 'batal']);
+Route::post('/kel-booking/batal', [BookingController::class, 'batal']);
+Route::get('/kel-booking/hapus/{id}', [BookingController::class, 'destroy']);
 Route::get('/getdatas/{id}', [BookingController::class, 'getdata']);
 
 

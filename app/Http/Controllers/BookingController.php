@@ -13,7 +13,7 @@ class BookingController extends Controller
     {
         $data = Booking::all();
         $lapangan = Lapangan::all();
-        return view('admin.kelola-booking', compact('data','lapangan'));
+        return view('admin.kelola-booking', compact('data', 'lapangan'));
     }
 
     public function store(Request $request)
@@ -49,14 +49,13 @@ class BookingController extends Controller
         // return hitung;
         $store = Booking::create($request->all());
 
-        if ($request->file('bukti_bayar')) {
-            $request->file('bukti_bayar')->move('images/', $request->file('bukti_bayar')->getClientOriginalName());
-            $data->bukti_bayar = $request->file('bukti_bayar')->getClientOriginalName();
-            $data->save();
-        } else {
-           
-        }
-        
+        // if ($request->file('bukti_bayar')) {
+        //     $request->file('bukti_bayar')->move('images/', $request->file('bukti_bayar')->getClientOriginalName());
+        //     $data->bukti_bayar = $request->file('bukti_bayar')->getClientOriginalName();
+        //     $data->save();
+        // } else {
+        // }
+
         return redirect()->back()->with('sukses', 'Lapangan Berhasil Dibooking !!!');
     }
 
@@ -87,13 +86,27 @@ class BookingController extends Controller
         return redirect()->back()->with('sukses', 'Bukti Bayar Berhasil Diupload !!!');
     }
 
-    public function batal(Request $request, $id)
+    public function batal(Request $request)
+    {
+        // dd($request->all());
+        $data = Booking::find($request->id);
+        $data->alasan_batal = $request->alasan_batal;
+        $data->save();
+
+        return redirect()->back()->with('sukses', 'Pembatalan Booking Sudah Diajukan !!!');
+    }
+
+    public function destroy($id)
     {
         $data = Booking::find($id);
-        $file = public_path('/images/') . $data->bukti_bayar;
-        @unlink($file);
-        $data->save();
-        return redirect()->back()->with('sukses', 'Booking Berhasil Dibatalkan !!!');
+        if ($data->bukti_bayar != null) {
+            $file = public_path('/images/') . $data->bukti_bayar;
+            @unlink($file);
+            $data->delete();
+        } else {
+            $data->delete();
+        }
+        return redirect()->back()->with('sukses', 'Data Booking Berhasil Dihapus !!!');
     }
 
     public function getdata($id)

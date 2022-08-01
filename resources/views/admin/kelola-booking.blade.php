@@ -27,7 +27,6 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
                     <th>Lapangan</th>
                     <th>Tanggal</th>
                     <th>Jam</th>
@@ -35,55 +34,140 @@
                     <th>Biaya</th>
                     <th>Bukti Bayar</th>
                     <th>Status</th>
-                    <th class="text-center">Aksi</th>
+                    <th class="text-center">Pembatalan Booking</th>
+                    @if (auth()->user()->role == 'Admin')
+                        <th>Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $datas)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $datas->user->nama }}</td>
                         <td>{{ $datas->lapangan->nama_lapangan }}</td>
                         <td>{{ $datas->tanggal }}</td>
                         <td>{{ $datas->jam }}</td>
                         <td>{{ $datas->durasi }} Jam</td>
-                        <td>
+                        <td>Rp.
                             @php
                                 $durasi = $datas->durasi;
-                                echo $biaya = $durasi * 50000;
+                                $harga = $datas->lapangan->biaya_lapangan;
+                                $biaya = $durasi * $harga;
+                                echo $biaya;
                             @endphp
                         </td>
                         <td>
-                            @if ($datas->bukti_bayar != null)
-                                <img style="height: 120px; width: 90px; object-fit: cover; object-position: center;"
-                                    class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}" alt="">
+                            @if (auth()->user()->role == 'User')
+                                @if ($datas->bukti_bayar != null)
+                                    <img style="height: 120px; width: 90px; object-fit: cover; object-position: center;"
+                                        class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
+                                        alt="">
+                                @else
+                                    <a href="#" onclick="getdatas({{ $datas->id }})"
+                                        class="btn btn-secondary btn-xs upload" data-toggle="modal"
+                                        data-target="#upload">Upload
+                                        Disini</a>
+                                @endif
                             @else
-                                <a href="#" onclick="getdatas({{ $datas->id }})"
-                                    class="btn btn-secondary btn-xs upload" data-toggle="modal" data-target="#upload">Upload
-                                    Disini</a>
+                                @if ($datas->bukti_bayar != null)
+                                    <img style="height: 120px; width: 90px; object-fit: cover; object-position: center;"
+                                        class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
+                                        alt="">
+                                @else
+                                    Belum Ada Bukti Bayar
+                                @endif
                             @endif
                         </td>
-                        @if ($datas->status == 'Dalam Proses')
-                            <td><span class="label label-warning">{{ $datas->status }}</span></td>
-                        @elseif ($datas->status == 'Disetujui')
-                            <td><span class="label label-success">{{ $datas->status }}</span></td>
+                        @if (auth()->user()->role == 'User')
+                            @if ($datas->alasan_batal == '')
+                                @if ($datas->status == 'Disetujui')
+                                    <td><span class="label label-success">{{ $datas->status }}</span></td>
+                                @elseif ($datas->status == 'Dalam Proses')
+                                    <td><span class="label label-warning">{{ $datas->status }}</span></td>
+                                @else
+                                    <td><span class="label label-danger">{{ $datas->status }}</span></td>
+                                @endif
+                            @else
+                                <td><span class="label label-warning">Pengajuan Pembatalan</span></td>
+                            @endif
                         @else
-                            <td><span class="label label-danger">{{ $datas->status }}</span></td>
+                            @if ($datas->alasan_batal == '')
+                                @if ($datas->status == 'Disetujui')
+                                    <td><a href="#"><span class="label label-success">{{ $datas->status }}</span></a>
+                                    </td>
+                                @elseif ($datas->status == 'Dalam Proses')
+                                    <td><a href="#"><span class="label label-warning">{{ $datas->status }}</span></a>
+                                    </td>
+                                @else
+                                    <td><a href="#"><span class="label label-danger">{{ $datas->status }}</span></a>
+                                    </td>
+                                @endif
+                            @else
+                                <td><a href="#"><span class="label label-warning">Pengajuan Pembatalan</span></a></td>
+                            @endif
                         @endif
-                        <td>
-                            <ul class="icons-list">
-                                <li class="text-danger-600"><a href="#" class="batal" id="{{ $datas->id }}"
+
+                        @if ($datas->alasan_batal == null)
+                            <td>
+                                <ul class="icons-list">
+                                    {{-- <li class="text-danger-600"><a href="#" class="batal" id="{{ $datas->id }}"
                                         lapangan="{{ $datas->lapangan->nama_lapangan }}"><i class="icon-trash"></i></a>
                                 </li>
-                                <li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
-                            </ul>
-                        </td>
+                                <li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li> --}}
+                                    <a href="#" onclick="getdatas({{ $datas->id }})" data-toggle="modal"
+                                        data-target="#batal" class="btn btn-danger btn-sm">Batalkan Booking Lapangan</a>
+                                </ul>
+                            </td>
+                        @else
+                            <td><button disabled class="btn btn-success btn-sm">Terima Kasih</button>
+                            </td>
+                        @endif
+                        @if (auth()->user()->role == 'Admin')
+                            <td>
+                                <ul class="icons-list">
+                                    <li class="text-danger-600"><a href="#" class="hapus"
+                                            id="{{ $datas->id }}"><i class="icon-trash"></i></a></li>
+                                </ul>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
     <!-- /basic datatable -->
+
+    {{-- modal batal booking --}}
+    <div id="batal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Alasan Pembatalan Booking Lapangan</h5>
+                </div>
+
+                <form action="{{ url('/kel-booking/batal') }}" class="form-horizontal" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" id="id_batal" value="">
+                    <input type="hidden" name="url_getdata" id="url_getdata" value="{{ url('getdata/') }}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Alasan Pembatalan</label>
+                            <div class="col-sm-9">
+                                <input name="alasan_batal" id="alasan_batal" type="text" class="form-control"
+                                    value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     {{-- modal upload --}}
     <div id="upload" class="modal fade">
@@ -97,8 +181,8 @@
                 <form action="{{ url('/kel-booking/update') }}" class="form-horizontal" method="post"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" id="id" value="">
-                    <input type="hidden" name="url_getdata" id="url_getdata" value="{{ url('getdatas/') }}">
+                    <input type="hidden" name="id" id="id_buktibayar" value="">
+                    <input type="hidden" name="url_getdata" id="url_getdatas" value="{{ url('getdatas/') }}">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Bukti Bayar</label>
@@ -118,7 +202,7 @@
         </div>
     </div>
 
-    <!-- /form modal -->
+    <!-- /form modal Booking Lapangan -->
     <div id="tambahbooking" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -136,14 +220,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Lapangan</label>
                             <div class="col-sm-9">
-                                @foreach ($lapangan as $lap)
-                                    <select name="lapangan_id" class="form-control" id="">
-                                        <option value="">--Pilih Lapangan--</option>
+                                <select name="lapangan_id" class="form-control" id="">
+                                    <option value="">--Pilih Lapangan--</option>
+                                    @foreach ($lapangan as $lap)
                                         <option value="{{ $lap->id }}" {{ old('lapangan_id') ? 'selected' : '' }}>
                                             {{ $lap->nama_lapangan }}
                                         </option>
-                                    </select>
-                                @endforeach
+                                    @endforeach
+                                </select>
                                 @error('nama_lapangan')
                                     <div class="text-danger ml-3 mt-2">
                                         {{ $message }}
@@ -238,9 +322,25 @@
 @endsection
 @section('footer')
     <script>
+        // function getdata(id) {
+        //     console.log(id)
+        //     var url = $('#url_getdata').val() + '/' + id
+        //     console.log(url);
+
+        //     $.ajax({
+        //         url: url,
+        //         cache: false,
+        //         success: function(response) {
+        //             console.log(response);
+
+        //             $('#id_batal').val(response.id);
+        //         }
+        //     });
+        // }
+
         function getdatas(id) {
             console.log(id)
-            var url = $('#url_getdata').val() + '/' + id
+            var url = $('#url_getdatas').val() + '/' + id
             console.log(url);
 
             $.ajax({
@@ -249,41 +349,28 @@
                 success: function(response) {
                     console.log(response);
 
-                    $('#id').val(response.id);
-                    // $('#bukti_bayar').val(response.bukti_bayar);
+                    $('#id_buktibayar').val(response.id);
+                    $('#id_batal').val(response.id);
                 }
             });
         }
 
-        $('.batal').click(function() {
+        $('.hapus').click(function() {
             var Id = $(this).attr('id');
-            var Lapangan = $(this).attr('lapangan');
-            // Swal.fire({
-            //         title: 'Yakin?',
-            //         text: "Mau Batal Booking di " + Lapangan + "?",
-            //         icon: 'warning',
-            //         showCancelButton: true,
-            //         confirmButtonColor: '#3085d6',
-            //         cancelButtonColor: '#d33',
-            //         confirmButtonText: 'Yakin',
-            //         cancelButtonText: 'Tidak',
-            //     })
             Swal.fire({
-                    title: 'Yakin Mau Batal Booking di "+Lapangan+"?',
-                    input: 'Tulis Alasan Pembatalan Booking',
-                    inputLabel: 'Alasan',
-                    inputValue: inputValue,
+                    title: 'Yakin?',
+                    text: "Mau Hapus Data Booking ini ?",
+                    icon: 'warning',
                     showCancelButton: true,
-                    inputValidator: (value) => {
-                        if (!value) {
-                            return 'You need to write something!'
-                        }
-                    }
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Tidak',
                 })
                 .then((result) => {
                     console.log(result);
                     if (result.value) {
-                        window.location = "/kel-booking/batal/" + Id + "";
+                        window.location = "/kel-booking/hapus/" + Id + "";
                     }
                 });
         });

@@ -43,7 +43,6 @@
                                             class="icon-trash"></i></a></li>
                                 {{-- <a href="#" class="btn btn-danger delete" namalapangan="{{ $datas->nama_lapangan }}"
                                     id="{{ $datas->id }}">Hapus</a> --}}
-                                <li class="text-teal-600"><a href="#"><i class="icon-cog7"></i></a></li>
                             </ul>
                         </td>
                     </tr>
@@ -148,10 +147,10 @@
         -->
         <!-- Theme JS files -->
         <!-- <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
         <!-- /theme JS files -->
         <!--
     @endpush -->
