@@ -25,10 +25,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [HomeController::class, 'index']);
+
+// kel-booking
 Route::get('/kel-booking', [BookingController::class, 'index']);
+Route::post('/kel-booking/store', [BookingController::class, 'store']);
+Route::post('/kel-booking/update', [BookingController::class, 'updateBuktibayar']);
+Route::get('/kel-booking/batal/{id}', [BookingController::class, 'batal']);
+Route::get('/getdatas/{id}', [BookingController::class, 'getdata']);
+
 
 Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
+    // kel-penyewa
     Route::get('/kel-penyewa', [PenyewaController::class, 'index']);
+
+    // kel-lapangan
     Route::get('/kel-lapangan', [LapanganController::class, 'index']);
     Route::post('/kel-lapangan/store', [LapanganController::class, 'store']);
     Route::post('/kel-lapangan/update', [LapanganController::class, 'update']);

@@ -148,10 +148,10 @@
         -->
         <!-- Theme JS files -->
         <!-- <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
         <!-- /theme JS files -->
         <!--
     @endpush -->
@@ -197,4 +197,14 @@
                 });
         });
     </script>
+
+    @push('detail')
+        <!-- Theme JS files -->
+        <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script>
+        <!-- /theme JS files -->
+    @endpush
 @endsection

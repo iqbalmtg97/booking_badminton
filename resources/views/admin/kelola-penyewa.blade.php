@@ -18,7 +18,7 @@
                         <button type="button" class="btn btn-primary btn-xs btn-labeled btn-rounded" data-toggle="modal"data-target="#modal_form_horizontal"><b><i class="icon-add"></i></b>Tambah</button>
 					</div>
 
-					<table class="table datatable-basic">
+						<table class="table" id="myTable">
 						<thead>
 							<tr>
 								<th>Nama</th>
@@ -45,7 +45,8 @@
 							</tr>
 						@endforeach
 						</tbody>
-					</table>
+						</table>
+
 				</div>
 				<!-- /basic datatable -->
 

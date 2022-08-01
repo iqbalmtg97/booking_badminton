@@ -24,19 +24,14 @@
     <script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
     <!-- /core JS files -->
 
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https:///cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
     {{-- Toastr --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
-    <!-- Theme JS files -->
     @stack('detail')
-    <!-- /theme JS files -->
-
-
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-
-
-
 
 </head>
 
@@ -143,6 +138,10 @@
     {{-- Toastr --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <!-- Datatable -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
     <script>
         @if (Session::has('sukses'))
             toastr.success("{{ Session::get('sukses') }}", "Selamat")
@@ -151,6 +150,10 @@
         @if (Session::has('gagal'))
             toastr.error("{{ Session::get('gagal') }}", "Gagal")
         @endif
+
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
     </script>
 </body>
 @yield('footer')
