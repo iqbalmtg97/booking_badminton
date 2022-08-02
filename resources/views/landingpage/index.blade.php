@@ -362,6 +362,9 @@ https://templatemo.com/tm-537-art-factory
     <!-- Global Init -->
     <script src={{ asset('frontend/js/custom.js') }}></script>
 
+    <script src="/js/app.js"></script>
+
+
 </body>
 
 </html>

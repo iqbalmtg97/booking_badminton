@@ -143,6 +143,7 @@
     <!-- Datatable -->
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
+    <script src="js/app.js"></script>
 
     <script>
         @if (Session::has('sukses'))
