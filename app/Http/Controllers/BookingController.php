@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Lapangan;
+use App\Models\Notifikasi;
 use Illuminate\Support\Facades\Validator;
+// use Auth;
+use Illuminate\Support\Facades\Auth;
+use Pusher\Pusher;
 
 class BookingController extends Controller
 {
     public function index()
     {
-        $data = Booking::all();
-        $lapangan = Lapangan::all();
-        return view('admin.kelola-booking', compact('data', 'lapangan'));
+        if (auth()->user()->role == 'Admin') {
+            $booking = Booking::all();
+            $lapangan = Lapangan::all();
+            return view('admin.kelola-booking', compact('booking', 'lapangan'));
+        } else {
+            $booking = Booking::where('user_id', auth()->user()->id)->get();
+            $lapangan = Lapangan::all();
+            return view('admin.kelola-booking', compact('booking', 'lapangan'));
+        }
     }
 
     public function store(Request $request)
@@ -42,11 +52,6 @@ class BookingController extends Controller
             return redirect()->back()->withErrors($validasi)->withInput()->with('gagal', 'Lapangan Gagal Dibooking, Ada Kesalahan Inputan !!!');
         }
 
-        // biaya
-        // foreach ($lapangan as $lap) {
-        //    $hitung = $lap->biaya_lapangan * 40000;
-        // }
-        // return hitung;
         $store = Booking::create($request->all());
 
         // if ($request->file('bukti_bayar')) {
@@ -55,6 +60,24 @@ class BookingController extends Controller
         //     $data->save();
         // } else {
         // }
+        $notifikasi = new Notifikasi;
+        $notifikasi->from = Auth::user()->id;
+        $id = $notifikasi->from;
+        $notifikasi->save();
+
+        // $options = array(
+        //     'cluster' => 'ap2',
+        //     'useTLS' => true
+        // );
+
+        // $pusher = new Pusher(
+        //     env('PUSHER_APP_KEY'),
+        //     env('PUSHER_APP_SECRET'),
+        //     env('PUSHER_APP_ID'),
+        // );
+
+        // $dt = ['from' => $id];
+        // $pusher->trigger('my-channel', 'my-event', $dt);
 
         return redirect()->back()->with('sukses', 'Lapangan Berhasil Dibooking !!!');
     }

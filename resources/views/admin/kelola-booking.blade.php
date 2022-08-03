@@ -29,11 +29,11 @@
                     Sekarang</button>
             </div>
         @endif
-
-        <table class="table datatable-basic" id="myTable">
+        <table class="table datatable-basic myTable">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Nama</th>
                     <th>Lapangan</th>
                     <th>Tanggal</th>
                     <th>Jam</th>
@@ -52,9 +52,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $datas)
+                @foreach ($booking as $datas)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $datas->user->nama }}</td>
                         <td>{{ $datas->lapangan->nama_lapangan }}</td>
                         <td>{{ $datas->tanggal }}</td>
                         <td>{{ $datas->jam }}</td>
@@ -180,6 +181,7 @@
                 @endforeach
             </tbody>
         </table>
+
     </div>
     <!-- /basic datatable -->
 
@@ -199,7 +201,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="col-sm-12 text-center">
-                                @if ($data->count() < '1')
+                                @if ($booking->count() < '1')
                                     Tidak Ada
                                 @else
                                     <img id="lihat_bukti"

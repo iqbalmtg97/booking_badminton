@@ -20,7 +20,7 @@
                 data-toggle="modal"data-target="#tambah_lapangan"><b><i class="icon-add"></i></b>Tambah</button>
         </div>
 
-        <table class="table datatable-basiccl" id="myTable">
+        <table class="table datatable-basiccl myTable">
             <thead>
                 <tr>
                     <th>Nama Lapangan</th>
@@ -42,8 +42,6 @@
                                 <li class="text-danger-600"><a href="#" class="delete"
                                         nama_lapangan="{{ $datas->nama_lapangan }}" id="{{ $datas->id }}"><i
                                             class="icon-trash"></i></a></li>
-                                {{-- <a href="#" class="btn btn-danger delete" namalapangan="{{ $datas->nama_lapangan }}"
-                                    id="{{ $datas->id }}">Hapus</a> --}}
                             </ul>
                         </td>
                     </tr>
@@ -142,19 +140,6 @@
     </div>
     <!-- /form modal -->
 
-
-
-    <!-- @push('detail')
-        -->
-        <!-- Theme JS files -->
-        <!-- <script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <script type="text/javascript" src="{{ asset('assets/js/pages/datatables_basic.js') }}"></script> -->
-        <!-- /theme JS files -->
-        <!--
-    @endpush -->
 @endsection
 @section('footer')
     {{-- get data lapangan --}}
