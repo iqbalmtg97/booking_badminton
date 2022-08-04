@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <table class="table" id="myTable">
+        <table class="table myTable">
             <thead>
                 <tr>
                     <th>Nama</th>

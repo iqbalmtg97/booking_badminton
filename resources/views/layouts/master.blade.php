@@ -50,6 +50,52 @@
         <div class="navbar-collapse collapse" id="navbar-mobile">
             <p class="navbar-text"><span class="label bg-success-400">Online</span></p>
             <ul class="nav navbar-nav navbar-right">
+                @if (auth()->user()->role == 'Admin')
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <div id="realtime">
+                                <i class="icon-bell2"></i>
+                                <span class="visible-xs-inline-block position-right">Messages</span>
+                                <span class="badge bg-warning-400">{{ $booking->count() }}</span>
+                            </div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-content width-350">
+
+                            <ul class="media-list dropdown-content-body">
+                                @foreach ($booking as $item)
+                                    <li class="media">
+                                        {{-- @if (auth()->user()->count() > 1)
+                                            <div class="media-left">
+                                                <img src="assets/images/placeholder.jpg" class="img-circle img-sm"
+                                                    alt="">
+                                                <span
+                                                    class="badge bg-danger-400 media-badge">{{ $item->user->count() }}</span>
+                                            </div>
+                                        @endif --}}
+                                        <div class="media-body">
+                                            <a href="#" class="media-heading">
+                                                <span class="text-semibold">{{ $item->user->nama }}</span>
+                                                <span
+                                                    class="media-annotation pull-right">{{ $item->user->created_at }}</span>
+                                            </a>
+
+                                            <span class="text-muted">Harap Konfirmasi
+                                                {{ $item->lapangan->nama_lapangan }}, pada tanggal
+                                                {{ $item->tanggal }}, jam {{ $item->jam }} !!!</span>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <div class="dropdown-content-footer">
+                                <a href="{{ url('/kel-booking') }}" data-popup="tooltip" title=""
+                                    data-original-title="All messages"><i class="icon-menu display-block"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                @endif
+
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/images/placeholder.jpg" alt="">
@@ -143,6 +189,7 @@
     <!-- Datatable -->
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
+    <script src="js/app.js"></script>
 
     <script>
         @if (Session::has('sukses'))
@@ -154,7 +201,28 @@
         @endif
 
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            $('.myTable').DataTable();
+        });
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            alert(1);
+        });
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                $('#realtime').load("/kel-booking #realtime");
+            }, 3000);
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                $('#realt').load("/kel-booking #realt");
+            }, 3000);
         });
     </script>
 </body>

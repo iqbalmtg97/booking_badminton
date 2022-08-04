@@ -12,7 +12,7 @@
                 <div class="panel bg-teal-400">
                     <div class="panel-body text-center">
 
-                        <h3 class="no-margin">{{ App\Models\User::all()->count() }}</h3>
+                        <h3 class="no-margin">{{ App\Models\User::where('role', 'User')->get()->count() }}</h3>
                         Total Penyewa
                     </div>
 

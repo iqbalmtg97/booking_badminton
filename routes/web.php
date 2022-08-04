@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessageCreated;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -17,6 +18,10 @@ use App\Http\Controllers\LapanganController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/message/created', function () {
+    MessageCreated::dispatch('lorem ipsum dolor sit amet');
+});
 
 Route::get('/', function () {
     return view('landingpage.index');

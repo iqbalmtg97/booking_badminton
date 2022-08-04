@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,8 +11,9 @@ class LapanganController extends Controller
 {
     public function index()
     {
+        $booking = Booking::all();
         $data = Lapangan::all();
-        return view('admin.kelola-lapangan', compact('data'));
+        return view('admin.kelola-lapangan', compact('data', 'booking'));
     }
 
     public function store(Request $request)

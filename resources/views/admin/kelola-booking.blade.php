@@ -2,8 +2,12 @@
 @section('tittle', 'Data Booking')
 @section('kel-booking', 'active')
 @section('conten')
-    <p style="padding-top: 10px; padding-bottom:10px" class="bg-danger text-center">Uang DP Akan Hangus 50% Jika Melakukan
-        Pembatalan, Uang Sisa DP Dapat Diambil Lansung Dilapangan</p>
+    @if (auth()->user()->role == 'User')
+        <p style="padding-top: 10px; padding-bottom:10px" class="bg-danger text-center">Jika Status Booking Disetujui Admin
+            dan
+            Penyewa Melakukan Pembatalan, Maka
+            Uang DP Akan Hangus 50%<br> Uang Sisa DP Dapat Diambil Langsung Dilapangan</p>
+    @endif
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Data Booking</h5>
@@ -21,15 +25,15 @@
         @else
             <div class="panel-body">
                 <button type="button" data-toggle="modal"data-target="#tambahbooking"
-                    class="btn btn-primary btn-xs btn-labeled btn-rounded"><b><i class="icon-people"></i></b>Booking
+                    class="btn btn-primary btn-xs btn-labeled btn-rounded"><b><i class="icon-add"></i></b>Booking
                     Sekarang</button>
             </div>
         @endif
-
-        <table class="table datatable-basic" id="myTable">
+        <table class="table datatable-basic myTable">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Nama</th>
                     <th>Lapangan</th>
                     <th>Tanggal</th>
                     <th>Jam</th>
@@ -48,9 +52,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $datas)
+                @foreach ($booking as $datas)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $datas->user->nama }}</td>
                         <td>{{ $datas->lapangan->nama_lapangan }}</td>
                         <td>{{ $datas->tanggal }}</td>
                         <td>{{ $datas->jam }}</td>
@@ -176,6 +181,7 @@
                 @endforeach
             </tbody>
         </table>
+
     </div>
     <!-- /basic datatable -->
 
@@ -195,10 +201,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="col-sm-12 text-center">
-                                <img id="lihat_bukti"
-                                    style="height: 500px; width: 300px; object-fit: cover; object-position: center;"
-                                    class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
-                                    alt="">
+                                @if ($booking->count() < '1')
+                                    Tidak Ada
+                                @else
+                                    <img id="lihat_bukti"
+                                        style="height: 500px; width: 300px; object-fit: cover; object-position: center;"
+                                        class="card-img-top" src="{{ asset('images/' . $datas->bukti_bayar) }}"
+                                        alt="">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -437,6 +447,7 @@
                     $('#id_batal').val(response.id);
                     $('#id_pilihan').val(response.id);
                     $('#id_lihat').val(response.id);
+                    $('#lihatbukti').val(response.lihat_bukti);
                 }
             });
         }
