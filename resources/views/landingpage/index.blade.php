@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Template Mo">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-
+    <link rel="shortcut icon" href="frontend/images/shuttlecock1.png">
     <title>Pattiro Booking Online</title>
     <!--
 
@@ -22,7 +22,9 @@ https://templatemo.com/tm-537-art-factory
     <link rel="stylesheet" type="text/css" href={{ asset('frontend/css/font-awesome.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('frontend/css/templatemo-art-factory.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('frontend/css/owl-carousel.css') }}>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 </head>
 
 <body>
@@ -45,13 +47,13 @@ https://templatemo.com/tm-537-art-factory
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">Booking Aja</a>
+                        <a href="#" class="logo">PATTIRO BADMINTON</a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#welcome" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#services">Jadwal Lapangan</a></li>
-                            <li class="scroll-to-section"><a href="#about">Cara Booking</a></li>
+                            <li class="scroll-to-section"><a href="#about">Jadwal Lapangan</a></li>
+                            <li class="scroll-to-section"><a href="#services">Cara Booking</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Kontak</a></li>
                             <li class="scroll-to-section"><a href="{{ url('/login') }}">Login</a></li>
                             <li class="scroll-to-section"><a href="{{ url('/register') }}">Register</a></li>
@@ -77,14 +79,13 @@ https://templatemo.com/tm-537-art-factory
                 <div class="row">
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12"
                         data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                        <h1>Art Factory is free <strong>for YOU</strong></h1>
-                        <p>This template is available for 100% free of charge on TemplateMo. Download, modify and use
-                            this for your business website.</p>
-                        <a href="#about" class="main-button-slider">Find Out More</a>
+                        <h1>Booking Online<strong></strong></h1> <br>
+                        <h3 class="text-white">Jam Operasional | 07.00-16.00 WIB</h3> <br> <br>
+                        <a href="{{ url('/login') }}" class="main-button-slider">Booking Sekarang</a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
                         data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                        <img src="frontend/images/slider-icon.png" class="rounded img-fluid d-block mx-auto"
+                        <img src="frontend/images/badminton1.png" class="rounded img-fluid d-block mx-auto"
                             alt="First Vector Graphic">
                     </div>
                 </div>
@@ -99,27 +100,34 @@ https://templatemo.com/tm-537-art-factory
     <section class="section" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-12 col-sm-12"
-                    data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                    <img src="frontend/images/left-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
-                </div>
-                <div class="right-text col-lg-5 col-md-12 col-sm-12 mobile-top-fix">
+                <div class="right-text col-lg-12 col-md-12 col-sm-12 mobile-top-fix">
                     <div class="left-heading">
-                        <h5>Vivamus sodales nisi id ante molestie venenatis</h5>
+                        <h5 class="text-center text-primary">INFORMASI JADWAL LAPANGAN</h5>
                     </div>
-                    <div class="left-text">
-                        <p>This template is <a href="#">last updated on 20 August 2019 </a>for main menu drop-down
-                            arrow and sub menu text color. Duis auctor dolor eu scelerisque vestibulum. Vestibulum
-                            lacinia, nisl sit amet tristique condimentum. <br><br>
-                            Sed a consequat velit. Morbi lectus sapien, vestibulum et sapien sit amet, ultrices
-                            malesuada odio. Donec non quam euismod, mattis dui a, ultrices nisi.</p>
-                        <a href="#about2" class="main-button">Discover More</a>
+                    <div class="center-text">
+                        <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-primary">Nama Pemboking</th>
+                                    <th class="text-center text-primary">Lapangan</th>
+                                    <th class="text-center text-primary">Tanggal</th>
+                                    <th class="text-center text-primary">Jam</th>
+                                    <th class="text-center text-primary">Durasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td class="text-center">{{ $item->user->nama }}</td>
+                                        <td class="text-center">{{ $item->lapangan->nama_lapangan }}</td>
+                                        <td class="text-center">{{ $item->tanggal }}</td>
+                                        <td class="text-center">{{ $item->jam }}</td>
+                                        <td class="text-center">{{ $item->durasi }} Jam</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hr"></div>
                 </div>
             </div>
         </div>
@@ -127,50 +135,7 @@ https://templatemo.com/tm-537-art-factory
     <!-- ***** Features Big Item End ***** -->
 
 
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section" id="about2">
-        <div class="container">
-            <div class="row">
-                <div class="left-text col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix">
-                    <div class="left-heading">
-                        <h5>Curabitur aliquam eget tellus id porta</h5>
-                    </div>
-                    <p>Proin justo sapien, posuere suscipit tortor in, fermentum mattis elit. Aenean in feugiat purus.
-                    </p>
-                    <ul>
-                        <li>
-                            <img src="frontend/images/about-icon-01.png" alt="">
-                            <div class="text">
-                                <h6>Nulla ultricies risus quis risus</h6>
-                                <p>You can use this website template for commercial or non-commercial purposes.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="frontend/images/about-icon-02.png" alt="">
-                            <div class="text">
-                                <h6>Donec consequat commodo purus</h6>
-                                <p>You have no right to re-distribute this template as a downloadable ZIP file on any
-                                    website.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="frontend/images/about-icon-03.png" alt="">
-                            <div class="text">
-                                <h6>Sed placerat sollicitudin mauris</h6>
-                                <p>If you have any question or comment, please <a rel="nofollow"
-                                        href="https://templatemo.com/contact">contact</a> us on TemplateMo.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big"
-                    data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                    <img src="frontend/images/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
+
 
 
     <!-- ***** Features Small Start ***** -->
@@ -180,66 +145,46 @@ https://templatemo.com/tm-537-art-factory
                 <div class="owl-carousel owl-theme">
                     <div class="item service-item">
                         <div class="icon">
-                            <i><img src="frontend/images/service-icon-01.png" alt=""></i>
+                            <i><img src="frontend/images/number-one.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">First Box Service</h5>
-                        <p>Aenean vulputate massa sed neque consectetur, ac fringilla quam aliquet. Sed a enim nec eros
-                            tempor cursus at id libero.</p>
-                        <a href="#" class="main-button">Read More</a>
+                        <h5 class="service-title">Langkah Satu</h5>
+                        <p>Lihat jadwal lapangan untuk mengetahui jadwal lapangan yang kosong.</p> <a href="#about">Cek
+                            Jadwal</a>
+                        {{-- <a href="#" class="main-button">Read More</a> --}}
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="frontend/images/service-icon-02.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Second Box Title</h5>
-                        <p>Pellentesque vitae urna ut nisi viverra tristique quis at dolor. In non sodales dolor, id
-                            egestas quam. Aliquam erat volutpat. </p>
-                        <a href="#" class="main-button">Discover More</a>
+                        <h5 class="service-title">Langkah Dua</h5>
+                        <p>Log-in ke dalam aplikasi, jika belum memiliki akun
+                            silahkan Registrasi terlebih dahulu. </p> <a href="{{ url('/login') }}">Log-in</a>
+                        {{-- <a href="#" class="main-button">Discover More</a> --}}
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="frontend/images/service-icon-03.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Third Title Box</h5>
-                        <p>Quisque finibus libero augue, in ultrices quam dictum id. Aliquam quis tellus sit amet urna
-                            tincidunt bibendum.</p>
-                        <a href="#" class="main-button">More Detail</a>
+                        <h5 class="service-title">Langkah Tiga</h5>
+                        <p>Klik Booking dan isi data booking, lengkapi semua data sesuai form.</p> <br>
+                        {{-- <a href="#" class="main-button">More Detail</a> --}}
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="frontend/images/service-icon-02.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Fourth Service Box</h5>
-                        <p>Fusce sollicitudin feugiat risus, tempus faucibus arcu blandit nec. Duis auctor dolor eu
-                            scelerisque vestibulum.</p>
-                        <a href="#" class="main-button">Read More</a>
+                        <h5 class="service-title">Langkah Empat</h5>
+                        <p>Lakukan pembayaran Down Paymen (DP), kemudian upload bukti pembayaran DP.</p> <br>
+                        {{-- <a href="#" class="main-button">Read More</a> --}}
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="frontend/images/service-icon-01.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Fifth Service Title</h5>
-                        <p>Curabitur aliquam eget tellus id porta. Proin justo sapien, posuere suscipit tortor in,
-                            fermentum mattis elit.</p>
-                        <a href="#" class="main-button">Discover</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="frontend/images/service-icon-03.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Sixth Box Title</h5>
-                        <p>Ut nibh velit, aliquam vitae pellentesque nec, convallis vitae lacus. Aliquam porttitor urna
-                            ut pellentesque.</p>
-                        <a href="#" class="main-button">Detail</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="frontend/images/service-icon-01.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Seventh Title Box</h5>
-                        <p>Sed a consequat velit. Morbi lectus sapien, vestibulum et sapien sit amet, ultrices malesuada
-                            odio. Donec non quam.</p>
-                        <a href="#" class="main-button">Read More</a>
+                        <h5 class="service-title">SELESAI</h5>
+                        <p> Admin akan memperoses
+                            bookingan anda. Silahkan cek secara berkala status Booking..</p> <br>
+                        {{-- <a href="#" class="main-button">Discover</a> --}}
                     </div>
                 </div>
             </div>
@@ -249,7 +194,42 @@ https://templatemo.com/tm-537-art-factory
 
 
     <!-- ***** Frequently Question Start ***** -->
-
+    <!-- ***** Features Big Item Start ***** -->
+    <section class="section" id="about2">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-8 col-md-12 col-sm-12 mobile-bottom-fix">
+                    <div class="left-heading">
+                        <h5>Pembayaran</h5>
+                    </div>
+                    <p>Untuk saat ini pembayaran dapat dilakukan melalui Mobile Banking & ShopeePay.
+                    </p>
+                    <ul>
+                        <li>
+                            <img src="frontend/images/about-icon-01.png" alt="">
+                            <div class="text">
+                                <h6>Pembayaran Mobile Banking</h6>
+                                <p>Anda dapat mentransfer ke Nomor Rekering 12109789 Atas Nama Admin Patiro Badminton.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="frontend/images/about-icon-02.png" alt="">
+                            <div class="text">
+                                <h6>Pembayaran ShopePay</h6>
+                                <p>Anda dapat melakukan pembayaran dengan melakukan scan pada barcode disamping.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-image col-lg-4 col-md-12 col-sm-12 mobile-bottom-fix-big"
+                    data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                    <img src="frontend/images/frame.png" class="rounded img-fluid d-block mx-auto" alt="App">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Big Item End ***** -->
     <!-- ***** Frequently Question End ***** -->
 
 
@@ -258,53 +238,18 @@ https://templatemo.com/tm-537-art-factory
         <div class="container-fluid">
             <div class="row">
                 <!-- ***** Contact Map Start ***** -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <div id="map">
-                        <!-- How to change your own map point
-                           1. Go to Google Maps
-                           2. Click on your location point
-                           3. Click "Share" and choose "Embed map" tab
-                           4. Copy only URL and paste it within the src="" field below
-                    -->
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907"
-                            width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.816320001959!2d109.36147641422781!3d-0.0573737355349107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d59ef2b1bca33%3A0xc5bedfabc161b705!2sGor%20Pattiro!5e0!3m2!1sid!2sid!4v1659709743246!5m2!1sid!2sid"
+                            width="100%" height="500px" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <!-- ***** Contact Map End ***** -->
 
                 <!-- ***** Contact Form Start ***** -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="contact-form">
-                        <form id="contact" action="" method="post">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <fieldset>
-                                        <input name="name" type="text" id="name" placeholder="Full Name"
-                                            required="" class="contact-field">
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <fieldset>
-                                        <input name="email" type="text" id="email" placeholder="E-mail"
-                                            required="" class="contact-field">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <textarea name="message" rows="6" id="message" placeholder="Your Message" required=""
-                                            class="contact-field"></textarea>
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="main-button">Send It</button>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+
                 <!-- ***** Contact Form End ***** -->
             </div>
         </div>
@@ -313,7 +258,7 @@ https://templatemo.com/tm-537-art-factory
 
 
     <!-- ***** Footer Start ***** -->
-    <footer>
+    {{-- <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-12 col-sm-12">
@@ -332,7 +277,73 @@ https://templatemo.com/tm-537-art-factory
                 </div>
             </div>
         </div>
+    </footer> --}}
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-muted">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4 text-primary">
+                            <i class="icon icon-gem me-3"></i>Patiro Boking Online
+                        </h6>
+                        <p>
+                            Merupakan aplikasi yang digunakan untuk melakukan booking lapangan badminton secara online.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4 text-primary">
+                            Menu
+                        </h6>
+                        <p>
+                            <a href="#about2" class="text-reset">Metode Pembayaran</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Harga</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Berita</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4 text-primary">Kontak</h6>
+                        <p> Pontianak, Kalimantan, Indonesia</p>
+                        <p>patirobadminton@gmail.com</p>
+                        <p>+(62)8 989-900-00</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2022
+
+        </div>
+        <!-- Copyright -->
     </footer>
+    <!-- Footer -->
 
     <!-- jQuery -->
     <script src={{ asset('frontend/js/jquery-2.1.0.min.js') }}></script>
@@ -352,7 +363,28 @@ https://templatemo.com/tm-537-art-factory
     <script src={{ asset('frontend/js/custom.js') }}></script>
 
     <script src="/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true
+            });
+        });
+    </script>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap.min.js"></script> --}}
+
+    {{-- https://code.jquery.com/jquery-3.5.1.js
+    https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js
+    https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js
+    https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js --}}
 
 </body>
 

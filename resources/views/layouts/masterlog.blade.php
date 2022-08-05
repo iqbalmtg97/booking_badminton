@@ -1,60 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pattiro Booking Online - @yield('tittle')</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="frontend/images/shuttlecock1.png">
 
-	<!-- Global stylesheets -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
-	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
-	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
-	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
-	<!-- /global stylesheets -->
+    <title>Pattiro Booking Online - @yield('tittle')</title>
 
-	<!-- Core JS files -->
-	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
-	<!-- /core JS files -->
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
 
-	<!-- Theme JS files -->
-	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <!-- Core JS files -->
+    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+    <!-- /core JS files -->
 
-	<script type="text/javascript" src="assets/js/core/app.js"></script>
-	<script type="text/javascript" src="assets/js/pages/login.js"></script>
-	<!-- /theme JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+    <script type="text/javascript" src="assets/js/pages/login.js"></script>
+    <!-- /theme JS files -->
 
 </head>
 
 <body class="login-container login-cover">
 
-	<!-- Page container -->
-	<div class="page-container">
+    <!-- Page container -->
+    <div class="page-container">
 
-		<!-- Page content -->
-		<div class="page-content">
+        <!-- Page content -->
+        <div class="page-content">
 
-			<!-- Main content -->
-			<div class="content-wrapper">
+            <!-- Main content -->
+            <div class="content-wrapper">
 
-            @yield('content')
+                @yield('content')
 
-			</div>
-			<!-- /main content -->
+            </div>
+            <!-- /main content -->
 
-		</div>
-		<!-- /page content -->
+        </div>
+        <!-- /page content -->
 
-	</div>
-	<!-- /page container -->
+    </div>
+    <!-- /page container -->
 
 </body>
+
 </html>

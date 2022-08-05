@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LapanganController;
 
 /*
@@ -23,9 +24,7 @@ Route::get('/message/created', function () {
     MessageCreated::dispatch('lorem ipsum dolor sit amet');
 });
 
-Route::get('/', function () {
-    return view('landingpage.index');
-});
+Route::get('/', [LandingController::class, 'index']);
 
 Auth::routes();
 

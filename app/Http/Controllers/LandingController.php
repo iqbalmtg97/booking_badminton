@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -13,7 +14,8 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return view('lanidngpage.index');
+        $data = Booking::where('status', 'setuju')->get();
+        return view('landingpage.index', compact('data'));
     }
 
     /**
